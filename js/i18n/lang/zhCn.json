@@ -1,0 +1,12 @@
+{
+  "common": {
+    "header": {
+      "home": "首页"
+    }
+  },
+  "pages": {
+    "home": {
+      "title": "首页"
+    }
+  }
+}

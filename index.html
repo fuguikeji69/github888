@@ -1,0 +1,533 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <link rel="shortcut icon" href="./favicon.ico" type="image/x-icon">
+    <title>起航工作室</title>
+    <meta name="description" content="起航工作室"
+    />
+    <meta name="keywords" content="起航工作室" />
+    <link rel="stylesheet" href="./lib/element-plus/index.2.1.10.css">
+    <link rel="stylesheet" href="./lib/element-plus/display.css">
+    <link rel="stylesheet" href="./lib/full-page/fullpage.min.css">
+    <link rel="stylesheet" href="./lib/font-awesome/css/font-awesome.css">
+
+    <link href="./lib/swiper/swiper-bundle.min.css" rel="stylesheet" />
+    <link href="./css/index.css?v=1.0.2" rel="stylesheet" />
+
+
+    <script src="./lib/jquery/jquery.min.js"></script>
+</head>
+
+<body>
+    <!-- content -->
+    <div id="app" style="position: relative;">
+        <!--页面Loading-->
+        <div id="page-loading" class="page-loading">
+            <span class="spin-dot"></span>
+        </div>
+
+        <!--头部导航-->
+        <!-- PC头部导航 -->
+        <div id="pc-header" class="hidden-xs-only bj-flex-aj pc-header" :class="{active:isActiveHeader}">
+            <div class="bj-flex-align bj-flex-row-between header-box">
+                <div class="logo-box">
+                    <a href="./"><img src="./images/logo2.png" /></a>
+                </div>
+                <div class="bj-flex-align bj-flex-row-end cloum-box">
+                    <a :class="{active:curNav=='home'}" href="./">
+                        <div class="name">首页</div>
+                        <div class="label">HOME</div>
+                    </a>
+                    
+                </div>
+            </div>
+        </div>
+        <!-- Mobie头部导航 -->
+        <div id="m-header" class="hidden-sm-and-up m-header" :class="{active:isActiveHeader}">
+            <div class="header-box">
+                <div class="bj-flex-align bj-flex-row-between navbar">
+                    <div class="bj-flex-align oper" v-show="!switchMenu">
+                        <div class="bj-flex-align bj-flex-row-between" @click="switchMenu = true">
+                            <div class="bj-flex-align menu_toggle">
+                                <svg width="20" height="20" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg" ratio="1">
+                            <rect y="9" width="20" height="2"></rect>
+                            <rect y="3" width="20" height="2"></rect>
+                            <rect y="15" width="20" height="2"></rect>
+                        </svg>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="bj-flex-aj logo">
+                    <img src="./images/logo3.png" style="height: 70%;width:auto">
+                </div>
+            </div>
+        </div>
+
+        <!-- Mobie菜单 -->
+        <el-drawer v-model="switchMenu" :with-header="false" direction="ltr" custom-class="m_menu" modal-class="m_menu_mark" size="156px">
+            <div class="m_menu_cont">
+                <div class="logo">
+                    <img src="./images/logo1.png" />
+                </div>
+                <div class="menu_list">
+                    <a class="home" :class="{active:curNav=='home'}" href="./">首页</a>
+
+                </div>
+            </div>
+        </el-drawer>
+
+
+
+        <!-- 内容 -->
+        <div class="page-cont">
+
+            <div class="banner-cont">
+                <div class="bnner-swiper swiper-container">
+                    <div class="swiper-wrapper">
+                        <div class="swiper-slide">
+                            <a class="bj-flex-aj img-cont" href="javascript:;" target="_self">
+                                    <img src="./upload/media/images/202506/3f02a689940f44c39aff95af3510658a.png" v-if="!isM" />
+                                    <img src="./upload/media/images/202506/37da0776119b48859b29689bfd2da20c.PNG" v-if="isM" />
+                                </a>
+                        </div>
+                    </div>
+                    <!-- Add Pagination -->
+                    <div class="swiper-button-prev bnner-prev"></div>
+                    <div class="swiper-button-next bnner-next"></div>
+                    <div class="swiper-pagination bnner-pagination"></div>
+                </div>
+            </div>
+
+            <div class="bj-flex bj-flex-justify studio-cont">
+                <div class="bj-flex-aj bj-flex-col cont">
+                    <div class="bj-flex-aj title-box"><img src="./images/titl_bg_1.png" /></div>
+                    <div class="silde-box">
+                        <div class="studio-swiper swiper-container">
+                            <div class="swiper-wrapper">
+                                <div class="swiper-slide">
+                                    <div class="bj-flex-aj slide-cont-item">
+                                        <div class="bj-flex-align bj-flex-col item-cont">
+                                            <div class="bj-flex-aj p-img"><img src="./upload/media/images/202506/85b8df688a0648169d115a9c7674dab8.png" /></div>
+                                            <div class="title">爬虫资料</div>
+                                            <div class="desc">根据下载地址实时抓取客户手机号码资料！<br>爬取数据范围：BV飞天，MJ名爵，DJ富游，奥比岛等</div>
+                                            <a class="detail" href="https://t.me/qh_158" target="_blank">0.2元/1条，万条起爬，本工作室保证数据为实时现抓！</a>
+                                            <div class="bj-flex-align bj-flex-row-between btn-box">
+                                                <a class="text-overflow link1" href="https://t.me/qh_158" target="_blank">联系客服</a>
+                                                <a class="text-overflow link2" href="https://t.me/qh_158" target="_blank">飞机频道</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="swiper-slide">
+                                    <div class="bj-flex-aj slide-cont-item">
+                                        <div class="bj-flex-align bj-flex-col item-cont">
+                                            <div class="bj-flex-aj p-img"><img src="./upload/media/images/202506/1d5800df1a704b7aa0540dabce87e6cd.png" /></div>
+                                            <div class="title">房间|同行|色敲等网页制作</div>
+                                            <div class="desc">根据所提供的网页复刻导航页，落地页，色敲跳转，客服系统等</div>
+                                            <a class="detail" href="https://t.me/qh_158" target="_blank">价格为1000元左右一年可选多个域名后缀！</a>
+                                            <div class="bj-flex-align bj-flex-row-between btn-box">
+                                                <a class="text-overflow link1" href="https://t.me/qh_158" target="_blank">联系客服</a>
+                                                <a class="text-overflow link2" href="https://t.me/qh_158" target="_blank">飞机频道</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="swiper-slide">
+                                    <div class="bj-flex-aj slide-cont-item">
+                                        <div class="bj-flex-align bj-flex-col item-cont">
+                                            <div class="bj-flex-aj p-img"><img src="./upload/media/images/202506/85b8df688a0648169d115a9c7674dab8.png" /></div>
+                                            <div class="title">仅支持USDT收款</div>
+                                            <div class="desc"></div>
+                                            <a class="detail" href="https://t.me/qh_158" target="_blank">认准收款地址:TWagSbrqUBk94x9tzsBre3suyq5eBSSSSS</a>
+                                            <div class="bj-flex-align bj-flex-row-between btn-box">
+                                                <a class="text-overflow link1" href="https://t.me/qh_158" target="_blank">联系客服</a>
+                                                <a class="text-overflow link2" href="https://t.me/qh_158" target="_blank">飞机频道</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                            </div>
+                        </div>
+                        <div class="swiper-button-prev studio-prev"></div>
+                        <div class="swiper-button-next studio-next"></div>
+                        <div class="swiper-pagination studio-pagination"></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="bj-flex bj-flex-justify game-cont">
+                <div class="bj-flex-align bj-flex-col cont">
+                    <div class="bj-flex-aj title-box"><img src="./images/titl_bg_2.png" /></div>
+                    <div class="bj-flex bj-flex-row-between bj-flex-wrap hidden-xs-only game-list">
+                        <a class="bj-flex-aj bj-flex-col" href="javascript:;"><img src="./images/wf_1.png" /><div class="label">重庆时时彩</div></a>
+                        <a class="bj-flex-aj bj-flex-col" href="javascript:;"><img src="./images/wf_2.png" /><div class="label">澳洲10</div></a>
+                        <a class="bj-flex-aj bj-flex-col" href="javascript:;"><img src="./images/wf_3.png" /><div class="label">澳洲5</div></a>
+                        <a class="bj-flex-aj bj-flex-col" href="javascript:;"><img src="./images/wf_4.png" /><div class="label">幸运飞艇</div></a>
+                        <a class="bj-flex-aj bj-flex-col" href="javascript:;"><img src="./images/wf_5.png" /><div class="label">极速时时彩</div></a>
+                        <a class="bj-flex-aj bj-flex-col" href="javascript:;"><img src="./images/wf_6.png" /><div class="label">极速飞艇</div></a>
+                        <a class="bj-flex-aj bj-flex-col" href="javascript:;"><img src="./images/wf_7.png" /><div class="label">极速赛车</div></a>
+                        <a class="bj-flex-aj bj-flex-col" href="javascript:;"><img src="./images/wf_8.png" /><div class="label">PC蛋蛋</div></a>
+                    </div>
+                    <div class="hidden-sm-and-up game-list game-show">
+                        <div class="game-swiper swiper-container">
+                            <div class="swiper-wrapper">
+                                <div class="swiper-slide">
+                                    <div class="slide-cont">
+                                        <a class="bj-flex-aj bj-flex-col" href="javascript:;"><img src="./images/wf_1.png" /><div class="label">重庆时时彩</div></a>
+                                    </div>
+                                </div>
+                                <div class="swiper-slide">
+                                    <div class="slide-cont">
+                                        <a class="bj-flex-aj bj-flex-col" href="javascript:;"><img src="./images/wf_2.png" /><div class="label">澳洲10</div></a>
+                                    </div>
+                                </div>
+                                <div class="swiper-slide">
+                                    <div class="slide-cont">
+                                        <a class="bj-flex-aj bj-flex-col" href="javascript:;"><img src="./images/wf_3.png" /><div class="label">澳洲5</div></a>
+                                    </div>
+                                </div>
+                                <div class="swiper-slide">
+                                    <div class="slide-cont">
+                                        <a class="bj-flex-aj bj-flex-col" href="javascript:;"><img src="./images/wf_4.png" /><div class="label">幸运飞艇</div></a>
+                                    </div>
+                                </div>
+                                <div class="swiper-slide">
+                                    <div class="slide-cont">
+                                        <a class="bj-flex-aj bj-flex-col" href="javascript:;"><img src="./images/wf_5.png" /><div class="label">极速时时彩</div></a>
+                                    </div>
+                                </div>
+                                <div class="swiper-slide">
+                                    <div class="slide-cont">
+                                        <a class="bj-flex-aj bj-flex-col" href="javascript:;"><img src="./images/wf_6.png" /><div class="label">极速飞艇</div></a>
+                                    </div>
+                                </div>
+                                <div class="swiper-slide">
+                                    <div class="slide-cont">
+                                        <a class="bj-flex-aj bj-flex-col" href="javascript:;"><img src="./images/wf_7.png" /><div class="label">极速赛车</div></a>
+                                    </div>
+                                </div>
+                                <div class="swiper-slide">
+                                    <div class="slide-cont">
+                                        <a class="bj-flex-aj bj-flex-col" href="javascript:;"><img src="./images/wf_8.png" /><div class="label">PC蛋蛋</div></a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="bj-flex bj-flex-justify why-cont">
+                <div class="bj-flex-align bj-flex-col cont">
+                    <div class="bj-flex-aj title-box"><img src="./images/titl_bg_3.png" /></div>
+                    <div class="bj-flex-align card-list">
+                        <div class="card-item">
+                            <div class="bj-flex-align bj-flex-col card-box">
+                                <div class="bj-flex-aj img-box"><img src="./upload/media/images/202506/8386405096ef47cc969d681e9e7e2291.png" /></div>
+                                <img class="icon" src="./images/icon3.png" />
+                                <div class="title">&#x56E0;&#x4E3A;&#x4E13;&#x6CE8; &#x6240;&#x4EE5;&#x4E13;&#x4E1A;</div>
+                                <div class="desc pub-line-2">团队多年只做一件事<br> 机器人软件为用户保驾护航</div>
+                            </div>
+                        </div>
+                        <div class="card-item">
+                            <div class="bj-flex-align bj-flex-col card-box">
+                                <div class="bj-flex-aj img-box"><img src="./upload/media/images/202506/730eb5ab120743f79fe4741d1d8597e7.png" /></div>
+                                <img class="icon" src="./images/icon3.png" />
+                                <div class="title">&#x591A;&#x5E74;&#x7684;&#x7ECF;&#x9A8C; &#x4E13;&#x4E1A;&#x7684;&#x601D;&#x7EF4;</div>
+                                <div class="desc pub-line-2">多名专业有经验的团队<br> 多名6年以上行业精英组成的售后人员</div>
+                            </div>
+                        </div>
+                        <div class="card-item">
+                            <div class="bj-flex-align bj-flex-col card-box">
+                                <div class="bj-flex-aj img-box"><img src="./upload/media/images/202506/f09c7e6912e04b5c8cd39358d429bda8.png" /></div>
+                                <img class="icon" src="./images/icon3.png" />
+                                <div class="title">&#x5E02;&#x573A;&#x9700;&#x6C42;&#x51B3;&#x5B9A;&#x5E02;&#x573A;</div>
+                                <div class="desc pub-line-2">10000+客户使用<br> 因为我们为用户需求而生</div>
+                            </div>
+                        </div>
+                        <div class="card-item">
+                            <div class="bj-flex-align bj-flex-col card-box">
+                                <div class="bj-flex-aj img-box"><img src="./upload/media/images/202506/428b2f1e29e348bd86ff2086deb4201f.png" /></div>
+                                <img class="icon" src="./images/icon3.png" />
+                                <div class="title">&#x552E;&#x540E;&#x65E0;&#x6B7B;&#x89D2;</div>
+                                <div class="desc pub-line-2">全天16小时有人值守<br> 疑难问题可远程一对一处理</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+
+        </div>
+
+        <div class="sidebar-box">
+
+            <div class="bj-flex-aj item fc_1">
+                <el-popover placement="left" :width="sidebarW" trigger="click">
+                    <template #reference>
+                <img src="./upload/media/images/202506/5ce92c393fa24602ba00c33e434c37f0.png" />
+            </template>
+                    <div class="sidebar-panel">
+                        <div class="title">无微信</div>
+                        <div class="bj-flex-aj contact" @click="copyText('111')">
+                            <a href="javascript:;">请联系电报</a>
+                            <img src="./images/icon_2.png" />
+                        </div>
+
+                    </div>
+                </el-popover>
+            </div>
+            <div class="bj-flex-aj item fc_2">
+                <el-popover placement="left" :width="sidebarW" trigger="click">
+                    <template #reference>
+                <img src="./upload/media/images/202506/71e08f4382b243b9a1c9996bc8cc8c53.png" />
+            </template>
+                    <div class="sidebar-panel">
+                        <div class="title">Telegram&#xFF08;&#x7535;&#x62A5;&#xFF09;&#x5BA2;&#x670D;</div>
+                        <div class="bj-flex-aj contact" @click="copyText('@qh_158')">
+                            <a href="javascript:;">@qh_158</a>
+                            <img src="./images/icon_2.png" />
+                        </div>
+                        <div class="bj-flex-aj bj-flex-col download">
+                            <a class="bj-flex-aj item" href="https://telegram.org" target="_blank">
+                            <img src="./images/icon1.png" />
+                            <span>Telegram &#x4E0B;&#x8F7D;</span>
+                        </a>
+                        </div>
+                    </div>
+                </el-popover>
+            </div>
+            <div class="bj-flex-aj item fc_3">
+                <el-popover placement="left" :width="sidebarW" trigger="click">
+                    <template #reference>
+                <img src="./upload/media/images/202506/e0613aa999244285a0c50bea746d6229.png" />
+            </template>
+                    <div class="sidebar-panel">
+                        <div class="title">请联系在线客服获取</div>
+                        <div class="bj-flex-aj contact" @click="copyText('333')">
+                            <a href="javascript:;">请联系在线客服获取</a>
+                            <img src="./images/icon_2.png" />
+                        </div>
+                        <div class="bj-flex-aj bj-flex-col download">
+                            <a class="bj-flex-aj item" href="333" target="_blank">
+                            <img src="./images/icon1.png" />
+                            <span>在线客服</span>
+                        </a>
+                            
+                        </div>
+                    </div>
+                </el-popover>
+            </div>
+            <div class="bj-flex-aj item fc_4" id="backtop">
+                <img src="./images/fc_4.png" />
+            </div>
+        </div>
+
+
+
+        <!-- 底部导航 -->
+        <div class="bj-flex-aj bj-flex-col footer-cont">
+            <div class="bj-flex-justify top-cont">
+                <div class="bj-flex bj-flex-row-between bj-flex-wrap cont">
+                    <div class="manifesto">
+                        <div class="name">&#x8d77;&#x822a;&#x8F6F;&#x4EF6;&#x5DE5;&#x4F5C;&#x5BA4;</div>
+                        <div class="xy-img"><img src="./images/slogan.png" /></div>
+                    </div>
+                    <div class="bj-flex bj-flex-row-around bj-flex-wrap bt-info">
+                        <div class="contact-us">
+                            <div class="title">联系我们</div>
+                            <div class="bj-flex item-cont pr10">
+                                <div class="items">
+                                    <a href="javascript:;">&#x5546;&#x52A1;/&#x5408;&#x4F5C;: @qh_158</a>
+                                    <a href="javascript:;">&#x6295;&#x8BC9;/&#x5EFA;&#x8BAE;: @qh_158</a>
+                                    <a href="javascript:;">Telegram: @qh_158</a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="link">
+                            <div class="title">友情链接</div>
+                            <div class="bj-flex bj-flex-wrap item-cont">
+                                <div class="items pr15">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="bj-flex-aj bottom-cont">
+                <span>Copyright &#xA9; 2025 &#x8F6F;&#x4EF6;&#x5DE5;&#x4F5C;&#x5BA4; MINGJUE. All Rights Reserved.</span>
+            </div>
+        </div>
+
+
+    </div>
+
+
+    <script src="./lib/vue/vue.global.prod.3.2.31.js"></script>
+    <script src="./lib/element-plus/index.full.min.2.1.10.js"></script>
+    <script src="./lib/element-plus/en.min.js"></script>
+    <script src="./lib/element-plus/zh-cn.min.js"></script>
+    <script src="./lib/vue-i18n/vue-i18n.global.prod.js"></script>
+
+
+    <script src="./js/storage.js?v=1.0.0"></script>
+    <script src="./js/api.js?v=1.0.0"></script>
+    <script src="./js/common.js?v=1.0.0"></script>
+
+    <script src="./lib/swiper/swiper-bundle.min.js"></script>
+
+
+    <script>
+        const _App = {
+            data() {
+                return {
+                    ..._data, //公共扩展属性
+                    curNav: "home", //当前栏目
+                    pageName: "home", //当前页面名称
+                    sidebarW: 260
+                };
+            },
+            created() {
+                this.sidebarW = this.isM ? 160 : 260;
+                this.pageInit();
+            },
+            mounted() {
+                this.$nextTick(() => {
+                    this.nextTickPageInit();
+                    this.initSlide();
+                });
+            },
+            methods: {
+                ..._methods,
+                //初始化Slide
+                initSlide() {
+
+                    $("#backtop").click(function() {
+                        $("html,body").animate({
+                            scrollTop: 0
+                        }, 300);
+                    });
+
+                    //顶部banner图slide
+                    var swiper1 = new Swiper('.bnner-swiper', {
+                        loop: true,
+                        autoplay: {
+                            delay: 5000,
+                            disableOnInteraction: false,
+                        },
+                        pagination: {
+                            el: '.bnner-pagination',
+                            clickable: true,
+                        },
+                        navigation: {
+                            nextEl: ".bnner-next",
+                            prevEl: ".bnner-prev",
+                        },
+                    });
+
+                    /**
+                     参数名	        默认	描述
+                     rotate	        50	    slide做3d旋转时Y轴的旋转角度
+                     stretch	    0	    每个slide之间的拉伸值，越大slide靠得越紧。5.3.6 后可使用%百分比
+                     depth	        100	    slide的位置深度。值越大z轴距离越远，看起来越小。
+                     modifier	    1	    depth和rotate和stretch的倍率，相当于depth*modifier、rotate*modifier、stretch*modifier，值越大这三个参数的效果越明显。
+                     slideShadows	true	是否开启slide阴影
+                     */
+                    //软件介绍下载slide
+                    var swiper2 = new Swiper(".studio-swiper", {
+                        effect: 'coverflow',
+                        slidesPerView: 3,
+                        centeredSlides: true,
+                        loop: true,
+                        coverflowEffect: {
+                            rotate: 0,
+                            stretch: -25,
+                            depth: 160,
+                            modifier: 2,
+                            slideShadows: false
+                        },
+                        pagination: {
+                            el: ".studio-pagination",
+                            clickable: true,
+                        },
+                        navigation: {
+                            nextEl: ".studio-next",
+                            prevEl: ".studio-prev",
+                        },
+                    });
+
+                    //支持游戏slide
+                    var swiper = new Swiper('.game-swiper', {
+                        loop: true,
+                        speed: 2500,
+                        slidesPerView: 3.8,
+                        spaceBetween: 10,
+                        centeredSlides: true,
+                        watchSlidesProgress: true,
+                        on: {
+                            setTranslate: function() {
+                                slides = this.slides
+                                for (i = 0; i < slides.length; i++) {
+                                    slide = slides.eq(i)
+                                    progress = slides[i].progress
+                                    slide.css({
+                                        'opacity': '',
+                                        'background': ''
+                                    });
+                                    slide.transform(''); //清除样式
+                                    slide.css('opacity', (1 - Math.abs(progress) / 6));
+                                    slide.transform('scale(' + (1 - Math.abs(progress) / 6) + ') ' + ' translate3d(0,' + Math.abs(progress) * -30 + 'px, 0)');
+                                }
+                            },
+                            setTransition: function(transition) {
+                                for (var i = 0; i < this.slides.length; i++) {
+                                    var slide = this.slides.eq(i)
+                                    slide.transition(transition);
+                                }
+                            },
+                        }
+                    });
+
+                },
+                //回到顶部
+                backtop() {
+                    document.body.scrollTop = document.documentElement.scrollTop = 0;
+                },
+                copyText(content) {
+                    if (!document.queryCommandSupported('copy')) { //为了兼容有些浏览器 queryCommandSupported 的判断
+                        // 不支持
+                        this.errorMsg('浏览器不支持')
+                    }
+                    let textarea = document.createElement("textarea")
+                    textarea.value = content
+                    textarea.readOnly = "readOnly"
+                    document.body.appendChild(textarea)
+                    textarea.select() // 选择对象
+                    textarea.setSelectionRange(0, content.length) //核心
+                    let result = document.execCommand("copy") // 执行浏览器复制命令
+                    if (result) {
+                        this.successMsg("复制成功")
+                    } else {
+                        this.errorMsg("复制失败，请检查h5中调用该方法的方式，是不是用户点击的方式调用的，如果不是请改为用户点击的方式触发该方法，因为h5中安全性，不能js直接调用！")
+                    }
+                    textarea.remove()
+                }
+            }
+        };
+    </script>
+
+    <script src="./js/site.js?v=1.0.0"></script>
+    <script>
+        document.addEventListener('contextmenu', function(e) {
+            e.preventDefault();
+        });
+    </script>
+</body>
+
+</html>
