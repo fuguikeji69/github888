@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>起航工作室 | 业务</title>
+  <style>
+    /* 全局重置+科幻基础样式 */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Consolas', 'Microsoft Yahei', monospace;
+    }
+    body {
+      background: linear-gradient(145deg, #000818, #001436, #080020);
+      min-height: 100vh;
+      color: #00f0ff;
+      padding: 2rem;
+      position: relative;
+      overflow-x: hidden;
+    }
+    body::before {
+      content: "";
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background: repeating-linear-gradient(0deg, rgba(0,240,255,0.03), rgba(0,240,255,0.03) 1px, transparent 1px, transparent 2px);
+      z-index: -1;
+    }
+
+    /* 页面标题-科幻发光样式 */
+    .page-title {
+      text-align: center;
+      margin-bottom: 2.5rem;
+      font-size: 2rem;
+      text-shadow: 0 0 5px #00f0ff, 0 0 10px #00f0ff, 0 0 20px #0088ff;
+      letter-spacing: 2px;
+      border-bottom: 1px solid rgba(0,240,255,0.3);
+      padding-bottom: 1rem;
+    }
+
+    /* 核心业务卡片容器 - 边框式布局（核心修改） */
+    .business-list {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+      gap: 1.5rem;
+      width: 100%;
+    }
+    /* 单个业务边框卡片 - 一行名称+二行内容+三行价格 */
+    .business-card {
+      border: 1px solid #00f0ff;
+      background: rgba(0, 20, 54, 0.4);
+      backdrop-filter: blur(8px);
+      border-radius: 6px;
+      padding: 1.8rem 1.5rem;
+      box-shadow: 0 0 15px rgba(0,240,255,0.3), inset 0 0 10px rgba(0,240,255,0.1);
+      transition: all 0.3s ease;
+      height: 100%;
+    }
+    /* 卡片悬停科幻特效 */
+    .business-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 0 25px rgba(0,240,255,0.5);
+      border-color: #47faff;
+    }
+    /* 第一行：项目名称（高亮发光） */
+    .card-title {
+      font-size: 1.3rem;
+      color: #99f0ff;
+      text-shadow: 0 0 6px #00f0ff;
+      letter-spacing: 1px;
+      margin-bottom: 1rem;
+      font-weight: 500;
+    }
+    /* 第二行：项目内容（常规展示） */
+    .card-content {
+      font-size: 1rem;
+      color: #c0f0ff;
+      line-height: 1.6;
+      margin-bottom: 1.5rem;
+      opacity: 0.9;
+    }
+    /* 第三行：项目价格（醒目高亮） */
+    .card-price {
+      font-size: 1.4rem;
+      color: #00f0ff;
+      text-shadow: 0 0 8px #00f0ff, 0 0 15px #0088ff;
+      font-weight: bold;
+      letter-spacing: 2px;
+    }
+
+    /* 响应式适配 - 移动端优化 */
+    @media (max-width: 768px) {
+      .page-title {
+        font-size: 1.5rem;
+        padding: 0 0 0.8rem;
+      }
+      .business-card {
+        padding: 1.5rem 1.2rem;
+      }
+      .card-title { font-size: 1.2rem; }
+      .card-content { font-size: 0.95rem; }
+      .card-price { font-size: 1.25rem; }
+    }
+
+    /* 侧边悬浮联系方式栏（纯字符图标） */
+    .contact-sidebar {
+      position: fixed;
+      top: 50%;
+      right: 1rem;
+      transform: translateY(-50%);
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+      z-index: 999;
+    }
+    .contact-item {
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      background: rgba(0, 20, 54, 0.6);
+      backdrop-filter: blur(5px);
+      border: 1px solid #00f0ff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.5rem;
+      color: #00f0ff;
+      cursor: pointer;
+      box-shadow: 0 0 10px rgba(0,240,255,0.3);
+      transition: all 0.3s ease;
+    }
+    .contact-item:hover {
+      background: rgba(0, 80, 120, 0.8);
+      box-shadow: 0 0 20px rgba(0,240,255,0.6);
+      transform: scale(1.1);
+    }
+
+    /* 联系方式弹窗样式-科幻磨砂玻璃 */
+    .modal-mask {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background: rgba(0,0,0,0.7);
+      backdrop-filter: blur(3px);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 1000;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.3s ease;
+    }
+    .modal-mask.active {
+      opacity: 1;
+      pointer-events: all;
+    }
+    .modal-box {
+      width: 90%;
+      max-width: 400px;
+      background: rgba(0, 20, 54, 0.8);
+      backdrop-filter: blur(10px);
+      border: 1px solid #00f0ff;
+      border-radius: 8px;
+      padding: 2rem;
+      box-shadow: 0 0 25px rgba(0,240,255,0.4);
+      text-align: center;
+    }
+    .modal-title {
+      font-size: 1.5rem;
+      color: #99f0ff;
+      margin-bottom: 1.5rem;
+      text-shadow: 0 0 5px #00f0ff;
+    }
+    .modal-content {
+      font-size: 1.2rem;
+      color: #c0f0ff;
+      line-height: 2;
+      letter-spacing: 1px;
+    }
+    .close-btn {
+      margin-top: 2rem;
+      padding: 0.6rem 2rem;
+      background: linear-gradient(to right, #001a40, #002860);
+      border: 1px solid #00f0ff;
+      color: #00f0ff;
+      border-radius: 4px;
+      cursor: pointer;
+      box-shadow: 0 0 8px rgba(0,240,255,0.3);
+      transition: all 0.2s ease;
+    }
+    .close-btn:hover {
+      box-shadow: 0 0 15px rgba(0,240,255,0.6);
+      background: linear-gradient(to right, #002860, #003880);
+    }
+        /* 弹窗双跳转按钮容器 - 均分宽度 */
+    .modal-btn-group {
+      display: flex;
+      gap: 1rem;
+      margin-top: 1rem;
+    }
+    /* 跳转按钮+关闭按钮 统一样式（科幻风） */
+    .modal-btn {
+      flex: 1;
+      padding: 0.6rem 0;
+      background: linear-gradient(to right, #001a40, #002860);
+      border: 1px solid #00f0ff;
+      color: #00f0ff;
+      border-radius: 4px;
+      cursor: pointer;
+      box-shadow: 0 0 8px rgba(0,240,255,0.3);
+      transition: all 0.2s ease;
+      font-size: 0.95rem;
+    }
+    .modal-btn:hover {
+      box-shadow: 0 0 15px rgba(0,240,255,0.6);
+      background: linear-gradient(to right, #002860, #003880);
+    }
+  </style>
+  </style>
+</head>
+<body>
+  <!-- 页面标题 -->
+  <h1 class="page-title">【起航业务】项目表飞机@qh_158</h1>
+
+  <!-- 核心业务卡片列表（边框式布局，替换原表格） -->
+  <div class="business-list">
+    <!-- 业务卡片1：一行名称+二行内容+三行价格 -->
+    <div class="business-card">
+      <div class="card-title">IP域名租用</div>
+      <div class="card-content">用于短信代发，短信，微信可以直发，功能是跳转到指定网页！</div>
+      <div class="card-price">¥ 200 / 月</div>
+    </div>
+    <!-- 业务卡片2 -->
+    <div class="business-card">
+      <div class="card-title">落地页制作</div>
+      <div class="card-content">用于房间或个别软件等引流作用。保留自己客户为主要目的</div>
+      <div class="card-price">¥ 1000起 / 年</div>
+    </div>
+    <!-- 业务卡片3 -->
+    <div class="business-card">
+      <div class="card-title">爬虫资料实时提取</div>
+      <div class="card-content">各种数据提取，名爵，飞天，大疆，奥比岛等</div>
+      <div class="card-price">¥ 0.2 / 条</div>
+    </div>
+    <!-- 业务卡片4 -->
+    <div class="business-card">
+      <div class="card-title">租用服务器</div>
+      <div class="card-content">云端租用，起到安全的作用！</div>
+      <div class="card-price">¥ 400起 / 月</div>
+    </div>
+    <!-- 业务卡片5 -->
+    <div class="business-card">
+      <div class="card-title">仅收取USDT</div>
+      <div class="card-content">TWagSbrqUBk94x9tzsBre3suyq5eBSSSSS</div>
+      <div class="card-price">请认准收款地址TRC-20</div>
+    </div>
+  </div>
+
+  <!-- 侧边联系方式栏（TG/WS/邮箱 纯字符图标） -->
+  <div class="contact-sidebar">
+    <div class="contact-item" onclick="openModal('TG')">✈️</div>
+    <div class="contact-item" onclick="openModal('WS')">📱</div>
+    <div class="contact-item" onclick="openModal('MAIL')">🤭</div>
+  </div>
+
+   <!-- 联系方式弹窗（动态渲染专属跳转按钮） -->
+  <div class="modal-mask" id="contactModal" onclick="closeModal()">
+    <div class="modal-box" onclick="event.stopPropagation()">
+      <h3 class="modal-title" id="modalTitle">联系方式</h3>
+      <div class="modal-content" id="modalContent"></div>
+      <!-- 动态按钮容器 -->
+      <div id="modalBtnContainer" class="modal-btn-group"></div>
+      <div class="modal-btn-group" style="margin-top:1.2rem">
+        <button class="modal-btn" onclick="closeModal()">关闭弹窗</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // 弹窗核心元素
+    const modal = document.getElementById('contactModal');
+    const modalTitle = document.getElementById('modalTitle');
+    const modalContent = document.getElementById('modalContent');
+    const modalBtnContainer = document.getElementById('modalBtnContainer');
+
+    // ✅ 核心配置：每个渠道独立的【双跳转按钮】信息（地址+文字可自由改）
+    const btnConfig = {
+      TG: [
+        { text: '电报频道：@qh_178', url: 'https://t.me/qh_178/' },
+        { text: '电报联系：@qh_158', url: 'https://t.me/qh_158/' }
+      ],
+      WS: [
+        { text: '', url: 'https://whatsapp.com' },
+        { text: '一键添加客服', url: 'https://wa.me/8619539585601' }
+      ],
+      MAIL: [
+        { text: '', url: '' },
+        { text: '三条下载', url: 'https://13t.cn/' }
+      ]
+    };
+
+    // 打开弹窗-渲染【专属】联系方式+跳转按钮
+    function openModal(type) {
+      modal.classList.add('active');
+      // 清空旧按钮，避免叠加
+      modalBtnContainer.innerHTML = '';
+
+      // 1. 渲染对应联系方式
+      switch(type) {
+        case 'TG':
+          modalTitle.textContent = '📡 Telegram 联系方式';
+          modalContent.textContent = '电报联系@qh_158电报频道@qh_178';
+          break;
+        case 'WS':
+          modalTitle.textContent = '📞 WhatsApp 联系方式';
+          modalContent.textContent = '+86 138 0000 8888';
+          break;
+        case 'MAIL':
+          modalTitle.textContent = '📩 三条 联系方式';
+          modalContent.textContent = '账号搜索qh158';
+          break;
+      }
+
+      // 2. 动态生成【专属】双跳转按钮
+      btnConfig[type].forEach(item => {
+        const btn = document.createElement('button');
+        btn.className = 'modal-btn';
+        btn.textContent = item.text;
+        btn.onclick = () => window.open(item.url, '_blank');
+        modalBtnContainer.appendChild(btn);
+      });
+    }
+
+    // 关闭弹窗
+    function closeModal() {
+      modal.classList.remove('active');
+    }
+  </script>
+</body>
+</html>
