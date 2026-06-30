@@ -1,357 +1,462 @@
 <!DOCTYPE html>
-<html lang="zh-CN">
+<html lang="en">
+
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>起航工作室 | 业务</title>
-  <style>
-    /* 全局重置+科幻基础样式 */
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-      font-family: 'Consolas', 'Microsoft Yahei', monospace;
-    }
-    body {
-      background: linear-gradient(145deg, #000818, #001436, #080020);
-      min-height: 100vh;
-      color: #000000;
-      padding: 2rem;
-      position: relative;
-      overflow-x: hidden;
-    }
-    body::before {
-      content: "";
-      position: fixed;
-      top: 0; left: 0;
-      width: 100%; height: 100%;
-      background: repeating-linear-gradient(0deg, rgba(0,240,255,0.03), rgba(0,240,255,0.03) 1px, transparent 1px, transparent 2px);
-      z-index: -1;
-    }
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <link rel="shortcut icon" href="./favicon.ico" type="image/x-icon">
+    <title>柒寒科技</title>
+    <link rel="stylesheet" href="./lib/element-plus/index.2.1.10.css">
+    <link rel="stylesheet" href="./lib/element-plus/display.css">
+    <link rel="stylesheet" href="./lib/full-page/fullpage.min.css">
+    <link rel="stylesheet" href="./lib/font-awesome/css/font-awesome.css">
 
-    /* 页面标题-科幻发光样式 */
-    .page-title {
-      text-align: center;
-      margin-bottom: 2.5rem;
-      font-size: 2rem;
-      text-shadow: 0 0 5px #00f0ff, 0 0 10px #00f0ff, 0 0 20px #0088ff;
-      letter-spacing: 2px;
-      border-bottom: 1px solid rgba(0,240,255,0.3);
-      padding-bottom: 1rem;
-    }
+    <link href="./lib/swiper/swiper-bundle.min.css" rel="stylesheet" />
+    <link href="./css/index.css?v=1.0.2" rel="stylesheet" />
 
-    /* 核心业务卡片容器 - 边框式布局（核心修改） */
-    .business-list {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
-      gap: 1.5rem;
-      width: 100%;
-    }
-    /* 单个业务边框卡片 - 一行名称+二行内容+三行价格 */
-    .business-card {
-      border: 1px solid #00f0ff;
-      background: rgba(0, 20, 54, 0.4);
-      backdrop-filter: blur(8px);
-      border-radius: 6px;
-      padding: 1.8rem 1.5rem;
-      box-shadow: 0 0 15px rgba(0,240,255,0.3), inset 0 0 10px rgba(0,240,255,0.1);
-      transition: all 0.3s ease;
-      height: 100%;
-    }
-    /* 卡片悬停科幻特效 */
-    .business-card:hover {
-      transform: translateY(-5px);
-      box-shadow: 0 0 25px rgba(0,240,255,0.5);
-      border-color: #47faff;
-    }
-    /* 第一行：项目名称（高亮发光） */
-    .card-title {
-      font-size: 1.3rem;
-      color: #99f0ff;
-      text-shadow: 0 0 6px #00f0ff;
-      letter-spacing: 1px;
-      margin-bottom: 1rem;
-      font-weight: 500;
-    }
-    /* 第二行：项目内容（常规展示） */
-    .card-content {
-      font-size: 1rem;
-      color: #c0f0ff;
-      line-height: 1.6;
-      margin-bottom: 1.5rem;
-      opacity: 0.9;
-    }
-    /* 第三行：项目价格（醒目高亮） */
-    .card-price {
-      font-size: 1.4rem;
-      color: #00f0ff;
-      text-shadow: 0 0 8px #00f0ff, 0 0 15px #0088ff;
-      font-weight: bold;
-      letter-spacing: 2px;
-    }
 
-    /* 响应式适配 - 移动端优化 */
-    @media (max-width: 768px) {
-      .page-title {
-        font-size: 1.5rem;
-        padding: 0 0 0.8rem;
-      }
-      .business-card {
-        padding: 1.5rem 1.2rem;
-      }
-      .card-title { font-size: 1.2rem; }
-      .card-content { font-size: 0.95rem; }
-      .card-price { font-size: 1.25rem; }
-    }
-
-    /* 侧边悬浮联系方式栏（纯字符图标） */
-    .contact-sidebar {
-      position: fixed;
-      top: 50%;
-      right: 1rem;
-      transform: translateY(-50%);
-      display: flex;
-      flex-direction: column;
-      gap: 1.5rem;
-      z-index: 999;
-    }
-    .contact-item {
-      width: 48px;
-      height: 48px;
-      border-radius: 50%;
-      background: rgba(0, 20, 54, 0.6);
-      backdrop-filter: blur(5px);
-      border: 1px solid #00f0ff;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 1.5rem;
-      color: #00f0ff;
-      cursor: pointer;
-      box-shadow: 0 0 10px rgba(0,240,255,0.3);
-      transition: all 0.3s ease;
-    }
-    .contact-item:hover {
-      background: rgba(0, 80, 120, 0.8);
-      box-shadow: 0 0 20px rgba(0,240,255,0.6);
-      transform: scale(1.1);
-    }
-
-    /* 联系方式弹窗样式-科幻磨砂玻璃 */
-    .modal-mask {
-      position: fixed;
-      top: 0; left: 0;
-      width: 100%; height: 100%;
-      background: rgba(0,0,0,0.7);
-      backdrop-filter: blur(3px);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      z-index: 1000;
-      opacity: 0;
-      pointer-events: none;
-      transition: opacity 0.3s ease;
-    }
-    .modal-mask.active {
-      opacity: 1;
-      pointer-events: all;
-    }
-    .modal-box {
-      width: 90%;
-      max-width: 400px;
-      background: rgba(0, 20, 54, 0.8);
-      backdrop-filter: blur(10px);
-      border: 1px solid #00f0ff;
-      border-radius: 8px;
-      padding: 2rem;
-      box-shadow: 0 0 25px rgba(0,240,255,0.4);
-      text-align: center;
-    }
-    .modal-title {
-      font-size: 1.5rem;
-      color: #99f0ff;
-      margin-bottom: 1.5rem;
-      text-shadow: 0 0 5px #00f0ff;
-    }
-    .modal-content {
-      font-size: 1.2rem;
-      color: #c0f0ff;
-      line-height: 2;
-      letter-spacing: 1px;
-    }
-    .close-btn {
-      margin-top: 2rem;
-      padding: 0.6rem 2rem;
-      background: linear-gradient(to right, #001a40, #002860);
-      border: 1px solid #00f0ff;
-      color: #00f0ff;
-      border-radius: 4px;
-      cursor: pointer;
-      box-shadow: 0 0 8px rgba(0,240,255,0.3);
-      transition: all 0.2s ease;
-    }
-    .close-btn:hover {
-      box-shadow: 0 0 15px rgba(0,240,255,0.6);
-      background: linear-gradient(to right, #002860, #003880);
-    }
-        /* 弹窗双跳转按钮容器 - 均分宽度 */
-    .modal-btn-group {
-      display: flex;
-      gap: 1rem;
-      margin-top: 1rem;
-    }
-    /* 跳转按钮+关闭按钮 统一样式（科幻风） */
-    .modal-btn {
-      flex: 1;
-      padding: 0.6rem 0;
-      background: linear-gradient(to right, #001a40, #002860);
-      border: 1px solid #00f0ff;
-      color: #00f0ff;
-      border-radius: 4px;
-      cursor: pointer;
-      box-shadow: 0 0 8px rgba(0,240,255,0.3);
-      transition: all 0.2s ease;
-      font-size: 0.95rem;
-    }
-    .modal-btn:hover {
-      box-shadow: 0 0 15px rgba(0,240,255,0.6);
-      background: linear-gradient(to right, #002860, #003880);
-    }
-  </style>
-  </style>
+    <script src="./lib/jquery/jquery.min.js"></script>
 </head>
+
 <body>
-  <!-- 页面标题 -->
-  <h1 class="page-title">【起航业务】项目表<br>飞机/电报:@qh_158<br>QQ:2510275990<br>丝瓜/三条:qh158</h1>
+    <!-- content -->
+    <div id="app" style="position: relative;">
+        <!--页面Loading-->
+        <div id="page-loading" class="page-loading">
+            <span class="spin-dot"></span>
+        </div>
 
-  <!-- 核心业务卡片列表（边框式布局，替换原表格） -->
-  <div class="business-list">
-    <!-- 业务卡片1：一行名称+二行内容+三行价格 -->
-    <div class="business-card">
-      <div class="card-title">IP域名租用</div>
-      <div class="card-content">用于短信代发，短信，微信可以直发，功能是跳转到指定网页！</div>
-      <div class="card-price">¥ 200 / 月</div>
-    </div>
-            <div class="business-card">
-      <div class="card-title">BV名爵代盗玩家账号！</div>
-      <div class="card-content">需提供无权限的子账号</div>
-      <div class="card-price">¥ 600起 / 次</div>
-    </div>
-    <!-- 业务卡片2 -->
-    <div class="business-card">
-      <div class="card-title">落地页制作</div>
-      <div class="card-content">用于房间或个别软件等引流作用。保留自己客户为主要目的</div>
-      <div class="card-price">¥ 1000起 / 年</div>
-    </div>
-        <div class="business-card">
-      <div class="card-title">娱乐抽奖网页出租</div>
-      <div class="card-content">飞机频道有试用！</div>
-      <div class="card-price">¥ 200起 / 月</div>
-    </div>
-        <div class="business-card">
-      <div class="card-title">积分商城网页出租</div>
-      <div class="card-content">试用私聊！</div>
-      <div class="card-price">¥ 300起 / 月</div>
-    </div>
-    <!-- 业务卡片3 -->
-    <div class="business-card">
-      <div class="card-title">爬虫资料实时提取</div>
-      <div class="card-content">各种数据提取，名爵，飞天，大疆，奥比岛等</div>
-      <div class="card-price">¥ 0.2 / 条</div>
-    </div>
-    <!-- 业务卡片4 -->
-    <div class="business-card">
-      <div class="card-title">租用服务器</div>
-      <div class="card-content">云端租用，起到安全的作用！</div>
-      <div class="card-price">¥ 400起 / 月</div>
-    </div>
-    <!-- 业务卡片5 -->
-    <div class="business-card">
-      <div class="card-title">仅收取USDT</div>
-      <div class="card-content">TWagSbrqUBk94x9tzsBre3suyq5eBSSSSS</div>
-      <div class="card-price">请认准收款地址TRC-20</div>
-    </div>
-  </div>
+        <!--头部导航-->
+        <!-- PC头部导航 -->
+        <div id="pc-header" class="hidden-xs-only bj-flex-aj pc-header" :class="{active:isActiveHeader}">
+            <div class="bj-flex-align bj-flex-row-between header-box">
+                <div class="logo-box">
+                    <a href="./"><img src="./images/logo2.webp" /></a>
+                </div>
+                <div class="bj-flex-align bj-flex-row-end cloum-box">
+                    <a :class="{active:curNav=='home'}" href="./">
+                        <div class="name">首页</div>
+                        <div class="label">HOME</div>
+                    </a>
+                    
+                </div>
+            </div>
+        </div>
+        <!-- Mobie头部导航 -->
+        <div id="m-header" class="hidden-sm-and-up m-header" :class="{active:isActiveHeader}">
+            <div class="header-box">
+                <div class="bj-flex-align bj-flex-row-between navbar">
+                    <div class="bj-flex-align oper" v-show="!switchMenu">
+                        <div class="bj-flex-align bj-flex-row-between" @click="switchMenu = true">
+                            <div class="bj-flex-align menu_toggle">
+                                <svg width="20" height="20" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg" ratio="1">
+                            <rect y="9" width="20" height="2"></rect>
+                            <rect y="3" width="20" height="2"></rect>
+                            <rect y="15" width="20" height="2"></rect>
+                        </svg>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="bj-flex-aj logo">
+                    <img src="./images/logo3.webp" style="height: 70%;width:auto">
+                </div>
+            </div>
+        </div>
 
-  <!-- 侧边联系方式栏（TG/WS/邮箱 纯字符图标） -->
-  <div class="contact-sidebar">
-    <div class="contact-item" onclick="openModal('TG')">✈️</div>
-    <div class="contact-item" onclick="openModal('WS')">📱</div>
-    <div class="contact-item" onclick="openModal('MAIL')">🤭</div>
-  </div>
+        <!-- Mobie菜单 -->
+        <el-drawer v-model="switchMenu" :with-header="false" direction="ltr" custom-class="m_menu" modal-class="m_menu_mark" size="156px">
+            <div class="m_menu_cont">
+                <div class="logo">
+                    <img src="./images/logo1.webp" />
+                </div>
+                <div class="menu_list">
+                    <a class="home" :class="{active:curNav=='home'}" href="./">首页</a>
 
-   <!-- 联系方式弹窗（动态渲染专属跳转按钮） -->
-  <div class="modal-mask" id="contactModal" onclick="closeModal()">
-    <div class="modal-box" onclick="event.stopPropagation()">
-      <h3 class="modal-title" id="modalTitle">联系方式</h3>
-      <div class="modal-content" id="modalContent"></div>
-      <!-- 动态按钮容器 -->
-      <div id="modalBtnContainer" class="modal-btn-group"></div>
-      <div class="modal-btn-group" style="margin-top:1.2rem">
-        <button class="modal-btn" onclick="closeModal()">关闭弹窗</button>
-      </div>
+                </div>
+            </div>
+        </el-drawer>
+
+
+
+        <!-- 内容 -->
+        <div class="page-cont">
+
+            <div class="banner-cont">
+                <div class="bnner-swiper swiper-container">
+                    <div class="swiper-wrapper">
+                        <div class="swiper-slide">
+                            <a class="bj-flex-aj img-cont" href="javascript:;" target="_self">
+                            <img src="./upload/media/images/202506/3f02a689940f44c39aff95af3510658a.webp" v-if="!isM" />
+                            <img src="./upload/media/images/202506/37da0776119b48859b29689bfd2da20c.webp" v-if="isM" />
+                        </a>
+                        </div>
+                    </div>
+                    <!-- Add Pagination -->
+                    <div class="swiper-button-prev bnner-prev"></div>
+                    <div class="swiper-button-next bnner-next"></div>
+                    <div class="swiper-pagination bnner-pagination"></div>
+                </div>
+            </div>
+
+            <div class="bj-flex bj-flex-justify studio-cont">
+                <div class="bj-flex-aj bj-flex-col cont">
+      
+                    <div class="silde-box">
+                        <div class="studio-swiper swiper-container">
+                            <div class="swiper-wrapper">
+                                <div class="swiper-slide">
+                                    <div class="bj-flex-aj slide-cont-item">
+                                        <div class="bj-flex-align bj-flex-col item-cont">
+                                            <div class="bj-flex-aj p-img"><img src="./upload/media/images/202506/85b8df688a0648169d115a9c7674dab8.webp" /></div>
+                                            <div class="title">爬虫资料</div>
+                                            <div class="desc">根据下载地址实时抓取客户手机号码资料！<br>爬取数据范围：BV飞天，MJ名爵，DJ富游，奥比岛等</div>
+                                            <a class="detail" href="https://t.me/qh_158" target="_blank">0.2元/1条，万条起爬，本工作室保证数据为实时现抓！</a>
+                                            <div class="bj-flex-align bj-flex-row-between btn-box">
+                                                <a class="text-overflow link1" href="https://t.me/qh_158" target="_blank">联系客服@qh_158</a>
+                                                <a class="text-overflow link2" href="https://t.me/qh_178" target="_blank">飞机频道@qh_178</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="swiper-slide">
+                                    <div class="bj-flex-aj slide-cont-item">
+                                        <div class="bj-flex-align bj-flex-col item-cont">
+                                            <div class="bj-flex-aj p-img"><img src="./upload/media/images/202506/f09c7e6912e04b5c8cd39358d429bda8.webp" /></div>
+                                            <div class="title">房间|同行|色敲等网页制作</div>
+                                            <div class="desc">根据所提供的网页复刻导航页，落地页，色敲跳转，客服系统等</div>
+                                            <a class="detail" href="https://t.me/qh_158" target="_blank">价格为1000元左右一年可选多个域名后缀！</a>
+                                            <div class="bj-flex-align bj-flex-row-between btn-box">
+                                                <a class="text-overflow link1" href="https://t.me/qh_158" target="_blank">联系客服@qh_158</a>
+                                                <a class="text-overflow link2" href="https://t.me/qh_178" target="_blank">飞机频道@qh_178</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="swiper-slide">
+                                    <div class="bj-flex-aj slide-cont-item">
+                                        <div class="bj-flex-align bj-flex-col item-cont">
+                                            <div class="bj-flex-aj p-img"><img src="./upload/media/images/202506/85b8df688a0648169d115a9c7674dab8.webp" /></div>
+                                            <div class="title">仅支持USDT收款</div>
+                                            <div class="desc"></div>
+                                            <a class="detail" href="https://t.me/qh_158" target="_blank">认准收款地址:TWagSbrqUBk94x9tzsBre3suyq5eBSSSSS</a>
+                                            <div class="bj-flex-align bj-flex-row-between btn-box">
+                                                <a class="text-overflow link1" href="https://t.me/qh_158" target="_blank">联系客服@qh_158</a>
+                                                <a class="text-overflow link2" href="https://t.me/qh_178" target="_blank">飞机频道@qh_178</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                            </div>
+                        </div>
+                        <div class="swiper-button-prev studio-prev"></div>
+                        <div class="swiper-button-next studio-next"></div>
+                        <div class="swiper-pagination studio-pagination"></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="bj-flex bj-flex-justify game-cont">
+                <div class="bj-flex-align bj-flex-col cont">
+                    <div class="bj-flex-aj title-box"><img src="./images/titl_bg_2.webp" /></div>
+                    <div class="bj-flex bj-flex-row-between bj-flex-wrap hidden-xs-only game-list">
+                        <a class="bj-flex-aj bj-flex-col" href="javascript:;"><img src="./images/wf_1.webp" /><div class="label">重庆时时彩</div></a>
+                        <a class="bj-flex-aj bj-flex-col" href="javascript:;"><img src="./images/wf_2.webp" /><div class="label">澳洲10</div></a>
+                        <a class="bj-flex-aj bj-flex-col" href="javascript:;"><img src="./images/wf_3.webp" /><div class="label">澳洲5</div></a>
+                        <a class="bj-flex-aj bj-flex-col" href="javascript:;"><img src="./images/wf_4.webp" /><div class="label">幸运飞艇</div></a>
+                        <a class="bj-flex-aj bj-flex-col" href="javascript:;"><img src="./images/wf_5.webp" /><div class="label">极速时时彩</div></a>
+                        <a class="bj-flex-aj bj-flex-col" href="javascript:;"><img src="./images/wf_6.webp" /><div class="label">极速飞艇</div></a>
+                        <a class="bj-flex-aj bj-flex-col" href="javascript:;"><img src="./images/wf_7.webp" /><div class="label">极速赛车</div></a>
+                        <a class="bj-flex-aj bj-flex-col" href="javascript:;"><img src="./images/wf_8.webp" /><div class="label">PC蛋蛋</div></a>
+                    </div>
+                    <div class="hidden-sm-and-up game-list game-show">
+                        <div class="game-swiper swiper-container">
+                            <div class="swiper-wrapper">
+                                <div class="swiper-slide">
+                                    <div class="slide-cont">
+                                        <a class="bj-flex-aj bj-flex-col" href="javascript:;"><img src="./images/wf_1.webp" /><div class="label">重庆时时彩</div></a>
+                                    </div>
+                                </div>
+                                <div class="swiper-slide">
+                                    <div class="slide-cont">
+                                        <a class="bj-flex-aj bj-flex-col" href="javascript:;"><img src="./images/wf_2.webp" /><div class="label">澳洲10</div></a>
+                                    </div>
+                                </div>
+                                <div class="swiper-slide">
+                                    <div class="slide-cont">
+                                        <a class="bj-flex-aj bj-flex-col" href="javascript:;"><img src="./images/wf_3.webp" /><div class="label">澳洲5</div></a>
+                                    </div>
+                                </div>
+                                <div class="swiper-slide">
+                                    <div class="slide-cont">
+                                        <a class="bj-flex-aj bj-flex-col" href="javascript:;"><img src="./images/wf_4.webp" /><div class="label">幸运飞艇</div></a>
+                                    </div>
+                                </div>
+                                <div class="swiper-slide">
+                                    <div class="slide-cont">
+                                        <a class="bj-flex-aj bj-flex-col" href="javascript:;"><img src="./images/wf_5.webp" /><div class="label">极速时时彩</div></a>
+                                    </div>
+                                </div>
+                                <div class="swiper-slide">
+                                    <div class="slide-cont">
+                                        <a class="bj-flex-aj bj-flex-col" href="javascript:;"><img src="./images/wf_6.webp" /><div class="label">极速飞艇</div></a>
+                                    </div>
+                                </div>
+                                <div class="swiper-slide">
+                                    <div class="slide-cont">
+                                        <a class="bj-flex-aj bj-flex-col" href="javascript:;"><img src="./images/wf_7.webp" /><div class="label">极速赛车</div></a>
+                                    </div>
+                                </div>
+                                <div class="swiper-slide">
+                                    <div class="slide-cont">
+                                        <a class="bj-flex-aj bj-flex-col" href="javascript:;"><img src="./images/wf_8.webp" /><div class="label">PC蛋蛋</div></a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+
+        </div>
+
+        <div class="sidebar-box">
+
+            <div class="bj-flex-aj item fc_1">
+                
+            </div>
+            <div class="bj-flex-aj item fc_2">
+                <el-popover placement="left" :width="sidebarW" trigger="click">
+                    <template #reference>
+                <img src="./upload/media/images/202506/71e08f4382b243b9a1c9996bc8cc8c53.webp" />
+            </template>
+                    <div class="sidebar-panel">
+                        <div class="title">Telegram&#xFF08;&#x7535;&#x62A5;&#xFF09;&#x5BA2;&#x670D;</div>
+                        <div class="bj-flex-aj contact" @click="copyText('@qh_158')">
+                            <a href="javascript:;">@qh_158</a>
+                            <img src="./images/icon_2.webp" />
+                        </div>
+                        <div class="bj-flex-aj bj-flex-col download">
+                            <a class="bj-flex-aj item" href="https://telegram.org" target="_blank">
+                            <img src="./images/icon1.webp" />
+                            <span>Telegram &#x4E0B;&#x8F7D;</span>
+                        </a>
+                        </div>
+                    </div>
+                </el-popover>
+            </div>
+            <div class="bj-flex-aj item fc_3">
+  
+            </div>
+            <div class="bj-flex-aj item fc_4" id="backtop">
+                <img src="./images/fc_4.webp" />
+            </div>
+        </div>
+
+
+
+        <!-- 底部导航 -->
+        <div class="bj-flex-aj bj-flex-col footer-cont">
+            <div class="bj-flex-justify top-cont">
+                <div class="bj-flex bj-flex-row-between bj-flex-wrap cont">
+                    <div class="manifesto">
+                        <div class="name">柒寒科技</div>
+                        <div class="xy-img"><img src="./images/slogan.webp" /></div>
+                    </div>
+                    <div class="bj-flex bj-flex-row-around bj-flex-wrap bt-info">
+                        <div class="contact-us">
+                            <div class="title">联系我们</div>
+                            <div class="bj-flex item-cont pr10">
+                                <div class="items">
+                                    <a href="javascript:;">&#x5546;&#x52A1;/&#x5408;&#x4F5C;: @qh_158</a>
+                                    <a href="javascript:;">&#x6295;&#x8BC9;/&#x5EFA;&#x8BAE;: @qh_158</a>
+                                    <a href="javascript:;">Telegram: @qh_158</a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="link">
+                            <div class="title">友情链接</div>
+                            <div class="bj-flex bj-flex-wrap item-cont">
+                                <div class="items pr15">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="bj-flex-aj bottom-cont">
+                <span>Copyright &#xA9; 2025 &#x8F6F;&#x4EF6;&#x5DE5;&#x4F5C;&#x5BA4; MINGJUE. All Rights Reserved.</span>
+            </div>
+        </div>
+
+
     </div>
-  </div>
 
-  <script>
-    // 弹窗核心元素
-    const modal = document.getElementById('contactModal');
-    const modalTitle = document.getElementById('modalTitle');
-    const modalContent = document.getElementById('modalContent');
-    const modalBtnContainer = document.getElementById('modalBtnContainer');
 
-    // ✅ 核心配置：每个渠道独立的【双跳转按钮】信息（地址+文字可自由改）
-    const btnConfig = {
-      TG: [
-        { text: '电报频道：@qh_178', url: 'https://t.me/qh_178/' },
-        { text: '电报联系：@qh_158', url: 'https://t.me/qh_158/' }
-      ],
-      WS: [
-        { text: '', url: 'https://whatsapp.com' },
-        { text: '一键添加客服', url: 'https://wa.me/' }
-      ],
-      MAIL: [
-        { text: '', url: '' },
-        { text: '三条下载', url: 'https://13t.cn/' }
-      ]
-    };
+    <script src="./lib/vue/vue.global.prod.3.2.31.js"></script>
+    <script src="./lib/element-plus/index.full.min.2.1.10.js"></script>
+    <script src="./lib/element-plus/en.min.js"></script>
+    <script src="./lib/element-plus/zh-cn.min.js"></script>
+    <script src="./lib/vue-i18n/vue-i18n.global.prod.js"></script>
 
-    // 打开弹窗-渲染【专属】联系方式+跳转按钮
-    function openModal(type) {
-      modal.classList.add('active');
-      // 清空旧按钮，避免叠加
-      modalBtnContainer.innerHTML = '';
 
-      // 1. 渲染对应联系方式
-      switch(type) {
-        case 'TG':
-          modalTitle.textContent = '📡 Telegram 联系方式';
-          modalContent.textContent = '电报联系@qh_158电报频道@qh_178';
-          break;
-        case 'WS':
-          modalTitle.textContent = '📞 WhatsApp 联系方式';
-          modalContent.textContent = '点击下方按钮直接联系';
-          break;
-        case 'MAIL':
-          modalTitle.textContent = '📩 三条 联系方式';
-          modalContent.textContent = '账号搜索qh158';
-          break;
-      }
+    <script src="./js/storage.js?v=1.0.0"></script>
+    <script src="./js/api.js?v=1.0.0"></script>
+    <script src="./js/common.js?v=1.0.0"></script>
 
-      // 2. 动态生成【专属】双跳转按钮
-      btnConfig[type].forEach(item => {
-        const btn = document.createElement('button');
-        btn.className = 'modal-btn';
-        btn.textContent = item.text;
-        btn.onclick = () => window.open(item.url, '_blank');
-        modalBtnContainer.appendChild(btn);
-      });
-    }
+    <script src="./lib/swiper/swiper-bundle.min.js"></script>
 
-    // 关闭弹窗
-    function closeModal() {
-      modal.classList.remove('active');
-    }
-  </script>
+
+    <script>
+        const _App = {
+            data() {
+                return {
+                    ..._data, //公共扩展属性
+                    curNav: "home", //当前栏目
+                    pageName: "home", //当前页面名称
+                    sidebarW: 260
+                };
+            },
+            created() {
+                this.sidebarW = this.isM ? 160 : 260;
+                this.pageInit();
+            },
+            mounted() {
+                this.$nextTick(() => {
+                    this.nextTickPageInit();
+                    this.initSlide();
+                });
+            },
+            methods: {
+                ..._methods,
+                //初始化Slide
+                initSlide() {
+
+                    $("#backtop").click(function() {
+                        $("html,body").animate({
+                            scrollTop: 0
+                        }, 300);
+                    });
+
+                    //顶部banner图slide
+                    var swiper1 = new Swiper('.bnner-swiper', {
+                        loop: true,
+                        autoplay: {
+                            delay: 5000,
+                            disableOnInteraction: false,
+                        },
+                        pagination: {
+                            el: '.bnner-pagination',
+                            clickable: true,
+                        },
+                        navigation: {
+                            nextEl: ".bnner-next",
+                            prevEl: ".bnner-prev",
+                        },
+                    });
+
+                    /**
+                     参数名	        默认	描述
+                     rotate	        50	    slide做3d旋转时Y轴的旋转角度
+                     stretch	    0	    每个slide之间的拉伸值，越大slide靠得越紧。5.3.6 后可使用%百分比
+                     depth	        100	    slide的位置深度。值越大z轴距离越远，看起来越小。
+                     modifier	    1	    depth和rotate和stretch的倍率，相当于depth*modifier、rotate*modifier、stretch*modifier，值越大这三个参数的效果越明显。
+                     slideShadows	true	是否开启slide阴影
+                     */
+                    //软件介绍下载slide
+                    var swiper2 = new Swiper(".studio-swiper", {
+                        effect: 'coverflow',
+                        slidesPerView: 3,
+                        centeredSlides: true,
+                        loop: true,
+                        coverflowEffect: {
+                            rotate: 0,
+                            stretch: -25,
+                            depth: 160,
+                            modifier: 2,
+                            slideShadows: false
+                        },
+                        pagination: {
+                            el: ".studio-pagination",
+                            clickable: true,
+                        },
+                        navigation: {
+                            nextEl: ".studio-next",
+                            prevEl: ".studio-prev",
+                        },
+                    });
+
+                    //支持游戏slide
+                    var swiper = new Swiper('.game-swiper', {
+                        loop: true,
+                        speed: 2500,
+                        slidesPerView: 3.8,
+                        spaceBetween: 10,
+                        centeredSlides: true,
+                        watchSlidesProgress: true,
+                        on: {
+                            setTranslate: function() {
+                                slides = this.slides
+                                for (i = 0; i < slides.length; i++) {
+                                    slide = slides.eq(i)
+                                    progress = slides[i].progress
+                                    slide.css({
+                                        'opacity': '',
+                                        'background': ''
+                                    });
+                                    slide.transform(''); //清除样式
+                                    slide.css('opacity', (1 - Math.abs(progress) / 6));
+                                    slide.transform('scale(' + (1 - Math.abs(progress) / 6) + ') ' + ' translate3d(0,' + Math.abs(progress) * -30 + 'px, 0)');
+                                }
+                            },
+                            setTransition: function(transition) {
+                                for (var i = 0; i < this.slides.length; i++) {
+                                    var slide = this.slides.eq(i)
+                                    slide.transition(transition);
+                                }
+                            },
+                        }
+                    });
+
+                },
+                //回到顶部
+                backtop() {
+                    document.body.scrollTop = document.documentElement.scrollTop = 0;
+                },
+                copyText(content) {
+                    if (!document.queryCommandSupported('copy')) { //为了兼容有些浏览器 queryCommandSupported 的判断
+                        // 不支持
+                        this.errorMsg('浏览器不支持')
+                    }
+                    let textarea = document.createElement("textarea")
+                    textarea.value = content
+                    textarea.readOnly = "readOnly"
+                    document.body.appendChild(textarea)
+                    textarea.select() // 选择对象
+                    textarea.setSelectionRange(0, content.length) //核心
+                    let result = document.execCommand("copy") // 执行浏览器复制命令
+                    if (result) {
+                        this.successMsg("复制成功")
+                    } else {
+                        this.errorMsg("复制失败，请检查h5中调用该方法的方式，是不是用户点击的方式调用的，如果不是请改为用户点击的方式触发该方法，因为h5中安全性，不能js直接调用！")
+                    }
+                    textarea.remove()
+                }
+            }
+        };
+    </script>
+
+    <script src="./js/site.js?v=1.0.0"></script>
+    <script>
+        document.addEventListener('contextmenu', function(e) {
+            e.preventDefault();
+        });
+    </script>
 </body>
+
+
 </html>
+

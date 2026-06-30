@@ -614,7 +614,7 @@ a {
 
 .pc-header .header-box .cloum-box a:hover,
 .pc-header .header-box .cloum-box a.active {
-    background: url(../images/icon2.png) no-repeat bottom center;
+    background: url(../images/icon2.webp) no-repeat bottom center;
     background-size: 41px auto
 }
 
@@ -797,59 +797,59 @@ a {
         color: #0c9efc
     }
     .m_menu_cont .menu_list a.home {
-        background: url(../images/m_1_1.png) no-repeat left center;
+        background: url(../images/m_1_1.webp) no-repeat left center;
         background-size: 24px auto
     }
     .m_menu_cont .menu_list a.home.active {
-        background: url(../images/m_1_0.png) no-repeat left center;
+        background: url(../images/m_1_0.webp) no-repeat left center;
         background-size: 24px auto
     }
     .m_menu_cont .menu_list a.product {
-        background: url(../images/m_2_1.png) no-repeat left center;
+        background: url(../images/m_2_1.webp) no-repeat left center;
         background-size: 24px auto
     }
     .m_menu_cont .menu_list a.product.active {
-        background: url(../images/m_2_0.png) no-repeat left center;
+        background: url(../images/m_2_0.webp) no-repeat left center;
         background-size: 24px auto
     }
     .m_menu_cont .menu_list a.news {
-        background: url(../images/m_3_1.png) no-repeat left center;
+        background: url(../images/m_3_1.webp) no-repeat left center;
         background-size: 24px auto
     }
     .m_menu_cont .menu_list a.news.active {
-        background: url(../images/m_3_0.png) no-repeat left center;
+        background: url(../images/m_3_0.webp) no-repeat left center;
         background-size: 24px auto
     }
     .m_menu_cont .menu_list a.course {
-        background: url(../images/m_4_1.png) no-repeat left center;
+        background: url(../images/m_4_1.webp) no-repeat left center;
         background-size: 24px auto
     }
     .m_menu_cont .menu_list a.course.active {
-        background: url(../images/m_4_0.png) no-repeat left center;
+        background: url(../images/m_4_0.webp) no-repeat left center;
         background-size: 24px auto
     }
     .m_menu_cont .menu_list a.about {
-        background: url(../images/m_5_1.png) no-repeat left center;
+        background: url(../images/m_5_1.webp) no-repeat left center;
         background-size: 24px auto
     }
     .m_menu_cont .menu_list a.about.active {
-        background: url(../images/m_5_0.png) no-repeat left center;
+        background: url(../images/m_5_0.webp) no-repeat left center;
         background-size: 24px auto
     }
     .m_menu_cont .menu_list a.qa {
-        background: url(../images/m_6_1.png) no-repeat left center;
+        background: url(../images/m_6_1.webp) no-repeat left center;
         background-size: 24px auto
     }
     .m_menu_cont .menu_list a.qa.active {
-        background: url(../images/m_6_0.png) no-repeat left center;
+        background: url(../images/m_6_0.webp) no-repeat left center;
         background-size: 24px auto
     }
     .m_menu_cont .menu_list a.download {
-        background: url(../images/m_7_1.png) no-repeat left center;
+        background: url(../images/m_7_1.webp) no-repeat left center;
         background-size: 24px auto
     }
     .m_menu_cont .menu_list a.download.active {
-        background: url(../images/m_7_0.png) no-repeat left center;
+        background: url(../images/m_7_0.webp) no-repeat left center;
         background-size: 24px auto
     }
     .footer-cont .top-cont {
@@ -934,7 +934,7 @@ a {
     display: block;
     width: 29px;
     height: 58px;
-    background: url(../images/jt_l.png) no-repeat left center;
+    background: url(../images/jt_l.webp) no-repeat left center;
     background-size: 100% auto
 }
 
@@ -948,19 +948,19 @@ a {
     display: block;
     width: 29px;
     height: 58px;
-    background: url(../images/jt_r.png) no-repeat left center;
+    background: url(../images/jt_r.webp) no-repeat left center;
     background-size: 100% auto
 }
 
 .page-cont .banner-cont .swiper-pagination .swiper-pagination-bullet {
     width: 28px;
     height: 28px;
-    background: url(../images/dot_1_1.png) no-repeat center;
+    background: url(../images/dot_1_1.webp) no-repeat center;
     background-size: 100%
 }
 
 .page-cont .banner-cont .swiper-pagination .swiper-pagination-bullet.swiper-pagination-bullet-active {
-    background: url(../images/dot_1_2.png) no-repeat center;
+    background: url(../images/dot_1_2.webp) no-repeat center;
     background-size: 100%
 }
 
@@ -1046,7 +1046,7 @@ a {
     display: block;
     width: 100%;
     height: 64px;
-    background: url(../images/bt_bg_3.png) no-repeat center;
+    background: url(../images/bt_bg_3.webp) no-repeat center;
     background-size: 100%;
     margin: 26px 0 24px 0;
     font-family: Microsoft YaqiHei;
@@ -1103,12 +1103,12 @@ a {
     display: block;
     width: 100px;
     height: 100px;
-    background: url(../images/bt_l_2.png) no-repeat left center;
+    background: url(../images/bt_l_2.webp) no-repeat left center;
     background-size: 100% auto
 }
 
 .page-cont .studio-cont .swiper-button-prev:hover::after {
-    background: url(../images/bt_l_1.png) no-repeat left center;
+    background: url(../images/bt_l_1.webp) no-repeat left center;
     background-size: 100% auto
 }
 
@@ -1122,31 +1122,31 @@ a {
     display: block;
     width: 100px;
     height: 100px;
-    background: url(../images/bt_r_2.png) no-repeat left center;
+    background: url(../images/bt_r_2.webp) no-repeat left center;
     background-size: 100% auto
 }
 
 .page-cont .studio-cont .swiper-button-next:hover::after {
-    background: url(../images/bt_r_1.png) no-repeat left center;
+    background: url(../images/bt_r_1.webp) no-repeat left center;
     background-size: 100% auto
 }
 
 .page-cont .studio-cont .swiper-pagination .swiper-pagination-bullet {
     width: 28px;
     height: 28px;
-    background: url(../images/dot_2_1.png) no-repeat center;
+    background: url(../images/dot_2_1.webp) no-repeat center;
     background-size: 100%
 }
 
 .page-cont .studio-cont .swiper-pagination .swiper-pagination-bullet.swiper-pagination-bullet-active {
-    background: url(../images/dot_2_2.png) no-repeat center;
+    background: url(../images/dot_2_2.webp) no-repeat center;
     background-size: 100%
 }
 
 .page-cont .game-cont {
     width: 100%;
     min-height: 1080px;
-    background: url(../images/bg_1.png) no-repeat center;
+    background: url(../images/bg_1.webp) no-repeat center;
     background-size: cover
 }
 
@@ -1196,7 +1196,7 @@ a {
 .page-cont .why-cont {
     width: 100%;
     min-height: 786px;
-    background: url(../images/bg_2.png) no-repeat center;
+    background: url(../images/bg_2.webp) no-repeat center;
     background-size: cover
 }
 
@@ -1551,7 +1551,7 @@ a {
     width: 200px;
     height: 36px;
     overflow: hidden;
-    background: url(../images/bg_5.png) no-repeat center;
+    background: url(../images/bg_5.webp) no-repeat center;
     background-size: 100%;
     margin-bottom: 8px;
     font-family: PingFang SC;
@@ -1622,7 +1622,7 @@ a {
     .page-cont .game-cont {
         width: 100%;
         min-height: 372px;
-        background: url(../images/bg_1.png) no-repeat center;
+        background: url(../images/bg_1.webp) no-repeat center;
         background-size: cover
     }
     .page-cont .game-cont .cont {
@@ -1670,7 +1670,7 @@ a {
     .page-cont .why-cont {
         width: 100%;
         min-height: 296px;
-        background: url(../images/bg_2.png) no-repeat center;
+        background: url(../images/bg_2.webp) no-repeat center;
         background-size: cover
     }
     .page-cont .why-cont .cont {
@@ -1724,7 +1724,7 @@ a {
         letter-spacing: -0.77px;
         text-align: center;
         padding: 0 22px;
-        background: url(../images/title_zs_3.png) no-repeat left center, url(../images/title_zs_4.png) no-repeat right center;
+        background: url(../images/title_zs_3.webp) no-repeat left center, url(../images/title_zs_4.webp) no-repeat right center;
         background-size: 10px auto, 10px auto
     }
     .page-cont .news-qa-cont .m-cont .label-box .label-cont .label span {
